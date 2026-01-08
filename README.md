@@ -1,49 +1,64 @@
-# TDD / BDD Final Project Template
+# TDD/BDD Final Project
 
-This repository contains the template to be used for the Final Project for the Coursera course **Introduction to TDD/BDD**.
+This project demonstrates the application of Test Driven Development (TDD) and Behavior Driven Development (BDD) methodologies to build a robust web service.
 
-## Usage
+## Overview
 
-This repository is to be used as a template to create your own repository in your own GitHub account. No need to Fork it as it has been set up as a Template. This will avoid confusion when making Pull Requests in the future.
+The project follows Agile development practices to ensure high code quality:
 
-From the GitHub **Code** page, press the green **Use this template** button to create your own repository from this template. 
+- **TDD**: Unit tests are implemented in the `tests/` directory to drive the development of the application logic.
+- **BDD**: Acceptance tests are defined in Gherkin syntax within the `features/` directory to verify the application's behavior from a user's perspective.
 
-Name your repo: `tdd-bdd-final-project`.
+## Project Structure
 
-## Setup
+- `service/`: Contains the main application source code and business logic.
+- `tests/`: Contains unit tests executed via `nosetests` (TDD).
+- `features/`: Contains Cucumber feature files and step definitions executed via `behave` (BDD).
+- `bin/`: Contains utility scripts for environment setup.
 
-After entering the lab environment you will need to run the `setup.sh` script in the `./bin` folder to install the prerequisite software.
+## Environment Setup
+
+A setup script is provided by IBM to provision the development environment, including Python 3.9, virtual environment configuration, and database setup.
+
+To initialize the environment, run:
 
 ```bash
 bash bin/setup.sh
 ```
 
-Then you must exit the shell and start a new one for the Python virtual environment to be activated.
+This script performs the following:
+
+1.  Installs Python 3.9 and creates a virtual environment.
+2.  Installs Selenium and Chrome drivers for BDD UI testing.
+3.  Installs Python dependencies from `requirements.txt`.
+4.  Starts a PostgreSQL database container using Docker. (I think anyway)
+
+## Running Tests
+
+### Unit Tests (TDD)
+
+To run the unit tests, execute:
 
 ```bash
-exit
+nosetests
 ```
 
-## Tasks
+### Acceptance Tests (BDD)
 
-In this project you will use good Test Driven Development (TDD) and Behavior Driven Development (BDD) techniques to write TDD test cases, BDD scenarios, and code, updating the following files:
+To run the behavioral tests, start the service first by running:
 
 ```bash
-tests/test_models.py
-tests/test_routes.py
-service/routes.py
-features/products.feature
-features/steps/load_steps.py
+honcho start
 ```
 
-You will be given partial implementations in each of these files to get you started. Use those implementations as examples of the code you should write.
+Then in a separate terminal, run:
+
+```bash
+behave
+```
+
+_Note: For BDD tests, the application server must be running. The project includes a VS Code task ("BDD tests") that automatically starts the server, runs the tests, and shuts down the server._
 
 ## License
 
-Licensed under the Apache License. See [LICENSE](/LICENSE)
-
-## Author
-
-John Rofrano, Senior Technical Staff Member, DevOps Champion, @ IBM Research
-
-## <h3 align="center"> © IBM Corporation 2023. All rights reserved. <h3/>
+This project is licensed under the Apache License, Version 2.0.
